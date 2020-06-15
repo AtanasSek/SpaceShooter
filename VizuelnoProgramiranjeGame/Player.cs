@@ -8,17 +8,11 @@ using VizuelnoProgramiranjeGame.Properties;
 
 namespace VizuelnoProgramiranjeGame
 {
-
-    public enum Direction
-    {
-        Up,Down,Left,Right
-    }
     class Player
     {
         public Point center;
-        public Direction direction;
-        public static readonly int playerHeight = 3;
-        public static readonly int playerWidth = 3;
+        public static readonly int playerHeight = 50;
+        public static readonly int playerWidth = 50;
         public Bitmap playerSprite;
 
         public Player(Point center)
@@ -33,6 +27,5 @@ namespace VizuelnoProgramiranjeGame
             Console.WriteLine("I'm dead inside");
         }
 
-      
     }
 }

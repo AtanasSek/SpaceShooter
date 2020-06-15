@@ -1,0 +1,10 @@
+C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\bin\Debug\VizuelnoProgramiranjeGame.exe.config
+C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\bin\Debug\VizuelnoProgramiranjeGame.exe
+C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\bin\Debug\VizuelnoProgramiranjeGame.pdb
+C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.csprojAssemblyReference.cache
+C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.Form1.resources
+C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.Properties.Resources.resources
+C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.csproj.GenerateResource.cache
+C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.csproj.CoreCompileInputs.cache
+C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.exe
+C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.pdb
