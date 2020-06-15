@@ -8,3 +8,13 @@ C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame
 C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.csproj.CoreCompileInputs.cache
 C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.exe
 C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.pdb
+C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\bin\Debug\VizuelnoProgramiranjeGame.exe.config
+C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\bin\Debug\VizuelnoProgramiranjeGame.exe
+C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\bin\Debug\VizuelnoProgramiranjeGame.pdb
+C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.csprojAssemblyReference.cache
+C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.Form1.resources
+C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.Properties.Resources.resources
+C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.csproj.GenerateResource.cache
+C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.csproj.CoreCompileInputs.cache
+C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.exe
+C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.pdb
