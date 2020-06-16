@@ -15,14 +15,13 @@ namespace VizuelnoProgramiranjeGame
     public partial class Form1 : Form
     {
         Player player;
+        Enemy enemy;
+        List<Projectile> projectiles;
         bool keyLeft;
         bool keyRight;
         bool keyUp;
         bool keyDown;
         bool pause;
-        Enemy enemy;
-        
-
         int score;
 
         Random enemySpawnPoint = new Random();
@@ -34,6 +33,7 @@ namespace VizuelnoProgramiranjeGame
             InitializeComponent();
             this.player = new Player(new Point(Screen.PrimaryScreen.WorkingArea.Width / 2, Screen.PrimaryScreen.WorkingArea.Height / 2));
             this.enemy = new Enemy(new Point(Screen.PrimaryScreen.WorkingArea.Width / 2, Screen.PrimaryScreen.WorkingArea.Height / 8));
+            this.projectiles = new List<Projectile>();
             startGame();
 
         }
@@ -55,22 +55,26 @@ namespace VizuelnoProgramiranjeGame
             {
                 case Keys.Left:
                     keyLeft = true;
-                    player.Move(Direction.Left);
+                    player.Move(playerControls.Left);
                     break;
 
                 case Keys.Right:
                     keyRight = true;
-                    player.Move(Direction.Right);
+                    player.Move(playerControls.Right);
                     break;
 
                 case Keys.Up:
                     keyUp = true;
-                    player.Move(Direction.Up);
+                    player.Move(playerControls.Up);
                     break;
 
                 case Keys.Down:
                     keyDown = true;
-                    player.Move(Direction.Down);
+                    player.Move(playerControls.Down);
+                    break;
+
+                case Keys.Space:
+                    projectiles.Add(player.Shoot());
                     break;
             }
             
@@ -95,6 +99,10 @@ namespace VizuelnoProgramiranjeGame
                 case Keys.Down:
                     keyDown = false;
                     break;
+
+                case Keys.Space:
+                    
+                    break;
             }
         }
 
@@ -107,6 +115,12 @@ namespace VizuelnoProgramiranjeGame
         {
             player.Draw(e.Graphics);
             enemy.Draw(e.Graphics);
+            
+            foreach(Projectile p in projectiles)
+            {
+                p.Move();
+                p.Draw(e.Graphics);
+            }
         }
     }
 }

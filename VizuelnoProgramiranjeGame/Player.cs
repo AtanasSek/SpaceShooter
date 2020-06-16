@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace VizuelnoProgramiranjeGame
 {
 
-    enum Direction
+    enum playerControls
     {
         Up,Down,Left,Right
     }
@@ -20,11 +20,14 @@ namespace VizuelnoProgramiranjeGame
         public static readonly int playerHeight = 50;
         public static readonly int playerWidth = 50;
         public Bitmap playerSprite;
+        float projectileCooldown = 1;
+        Timer shootCooldown;
 
         public Player(Point center)
         {
             this.center = center;
             this.playerSprite = new Bitmap(Resources.PSprite);
+            this.shootCooldown = new Timer();
         }
     
         public void Draw(Graphics g)
@@ -33,28 +36,37 @@ namespace VizuelnoProgramiranjeGame
             Console.WriteLine("Drawing player");
         }
 
-        public void Move(Direction direction)
+        public Projectile Shoot()//TODO: Cooldown treba na pukanje
         {
-            switch (direction)
+            
+            shootCooldown.Start();
+            
+            Projectile p = new Projectile(this.center);
+            return p;
+           
+        }
+
+        public void Move(playerControls action)
+        {
+            switch (action)
             {
-                case Direction.Up:
+                case playerControls.Up:
                     this.center = new Point(center.X, center.Y - 12);
                     break;
 
-                case Direction.Down:
+                case playerControls.Down:
                     this.center = new Point(center.X, center.Y + 12);
                     break;
 
-                case Direction.Left:
+                case playerControls.Left:
                     this.center = new Point(center.X - 12, center.Y);
                     break;
 
-                case Direction.Right:
+                case playerControls.Right:
                     this.center = new Point(center.X + 12, center.Y);
                     break;
-            }
 
-           
+            }
         }
 
     }
