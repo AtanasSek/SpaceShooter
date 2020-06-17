@@ -4,25 +4,38 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VizuelnoProgramiranjeGame.Properties;
 
 namespace VizuelnoProgramiranjeGame
 {
     class Enemy
     {
         Point center;
-        int radius = 60;
+        int enemyWidth = 60;
+        int enemyHeight = 60;
+        public Bitmap enemySprite;
+        public Rectangle enemyHitbox;
+        
         public Enemy(Point center)
         {
             this.center = center;
+            enemySprite = new Bitmap(Resources.ESprite);
+
+            this.enemyHitbox.X = this.center.X;
+            this.enemyHitbox.Y = this.center.Y;
+            this.enemyHitbox.Width = enemyWidth;
+            this.enemyHitbox.Height = enemyHeight;
         }
 
         public void Draw(Graphics g)
         {
-            Brush brush = new SolidBrush(Color.Red);
-            g.FillEllipse(brush, center.X - radius, center.Y - radius,
-                2 * radius, 2 * radius);
+            g.DrawImage(image: enemySprite, center.X, center.Y, enemyWidth, enemyHeight);
+        }
 
-            brush.Dispose();
+        public void Move()
+        {
+            center = new Point(center.X, center.Y + 4);
+            enemyHitbox.Y = center.Y;
         }
     }
 }

@@ -32,6 +32,7 @@
             this.lblScore = new System.Windows.Forms.Label();
             this.mainTimer = new System.Windows.Forms.Timer(this.components);
             this.lblTimer = new System.Windows.Forms.Label();
+            this.enemyTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // lblScore
@@ -47,6 +48,7 @@
             // 
             // mainTimer
             // 
+            this.mainTimer.Interval = 10;
             this.mainTimer.Tick += new System.EventHandler(this.mainTimer_Tick);
             // 
             // lblTimer
@@ -59,6 +61,11 @@
             this.lblTimer.TabIndex = 1;
             this.lblTimer.Text = "Timer ";
             // 
+            // enemyTimer
+            // 
+            this.enemyTimer.Interval = 3000;
+            this.enemyTimer.Tick += new System.EventHandler(this.enemyTimer_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -69,7 +76,7 @@
             this.Controls.Add(this.lblScore);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
-            this.Text = "Index Quest";
+            this.Text = "Alien Shooter placeholder";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyIsDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.keyIsUp);
@@ -83,6 +90,7 @@
         private System.Windows.Forms.Label lblScore;
         private System.Windows.Forms.Timer mainTimer;
         private System.Windows.Forms.Label lblTimer;
+        private System.Windows.Forms.Timer enemyTimer;
     }
 }
 

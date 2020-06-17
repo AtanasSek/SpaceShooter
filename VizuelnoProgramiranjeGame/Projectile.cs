@@ -15,6 +15,11 @@ namespace VizuelnoProgramiranjeGame
         {
             this.firingPoint = firingPoint;
         }
+
+        public Point getFiringPoint()
+        {
+            return firingPoint;
+        }
         
         public void Draw(Graphics g)
         {

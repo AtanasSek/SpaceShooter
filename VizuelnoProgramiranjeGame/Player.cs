@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using VizuelnoProgramiranjeGame.Properties;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace VizuelnoProgramiranjeGame
 {
@@ -20,30 +21,44 @@ namespace VizuelnoProgramiranjeGame
         public static readonly int playerHeight = 50;
         public static readonly int playerWidth = 50;
         public Bitmap playerSprite;
-        float projectileCooldown = 1;
-        Timer shootCooldown;
+        public Rectangle playerHitbox;
+
+
+        public float shootCooldown = 1;
+        public Stopwatch CooldownTimer;
 
         public Player(Point center)
         {
             this.center = center;
             this.playerSprite = new Bitmap(Resources.PSprite);
-            this.shootCooldown = new Timer();
+            this.CooldownTimer = new Stopwatch();
+            this.CooldownTimer.Start();
+
+            this.playerHitbox.X = this.center.X;
+            this.playerHitbox.Y = this.center.Y;
+            this.playerHitbox.Width = playerWidth;
+            this.playerHitbox.Height = playerHeight;
+            
         }
     
         public void Draw(Graphics g)
         {
             g.DrawImage(image: playerSprite, center.X, center.Y, playerWidth, playerHeight);
-            Console.WriteLine("Drawing player");
         }
 
-        public Projectile Shoot()//TODO: Cooldown treba na pukanje
+        //TODO: Cooldown treba na pukanje
+        public Projectile Shoot()
         {
-            
-            shootCooldown.Start();
             
             Projectile p = new Projectile(this.center);
             return p;
-           
+        }
+
+        public bool isHit(Enemy enemy)
+        {
+            if (enemy.enemyHitbox.IntersectsWith(playerHitbox))
+                return true;
+            else return false;
         }
 
         public void Move(playerControls action)
@@ -52,18 +67,22 @@ namespace VizuelnoProgramiranjeGame
             {
                 case playerControls.Up:
                     this.center = new Point(center.X, center.Y - 12);
+                    this.playerHitbox.Y = center.Y;
                     break;
 
                 case playerControls.Down:
                     this.center = new Point(center.X, center.Y + 12);
+                    this.playerHitbox.Y = center.Y;
                     break;
 
                 case playerControls.Left:
                     this.center = new Point(center.X - 12, center.Y);
+                    this.playerHitbox.X = center.X;
                     break;
 
                 case playerControls.Right:
                     this.center = new Point(center.X + 12, center.Y);
+                    this.playerHitbox.X = center.X;
                     break;
 
             }
