@@ -39,15 +39,15 @@
             // 
             this.lblScore.AutoSize = true;
             this.lblScore.ForeColor = System.Drawing.Color.White;
-            this.lblScore.Location = new System.Drawing.Point(16, 11);
-            this.lblScore.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblScore.Location = new System.Drawing.Point(12, 9);
             this.lblScore.Name = "lblScore";
-            this.lblScore.Size = new System.Drawing.Size(61, 17);
+            this.lblScore.Size = new System.Drawing.Size(47, 13);
             this.lblScore.TabIndex = 0;
             this.lblScore.Text = "Score: 0";
             // 
             // mainTimer
             // 
+            this.mainTimer.Enabled = true;
             this.mainTimer.Interval = 10;
             this.mainTimer.Tick += new System.EventHandler(this.mainTimer_Tick);
             // 
@@ -55,9 +55,10 @@
             // 
             this.lblTimer.AutoSize = true;
             this.lblTimer.ForeColor = System.Drawing.Color.White;
-            this.lblTimer.Location = new System.Drawing.Point(98, 11);
+            this.lblTimer.Location = new System.Drawing.Point(74, 9);
+            this.lblTimer.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTimer.Name = "lblTimer";
-            this.lblTimer.Size = new System.Drawing.Size(48, 17);
+            this.lblTimer.Size = new System.Drawing.Size(36, 13);
             this.lblTimer.TabIndex = 1;
             this.lblTimer.Text = "Timer ";
             // 
@@ -68,13 +69,12 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.lblTimer);
             this.Controls.Add(this.lblScore);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Alien Shooter placeholder";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);

@@ -15,6 +15,7 @@ namespace VizuelnoProgramiranjeGame
 {
     public partial class Form1 : Form
     {
+        
         Player player;
         List<Projectile> projectiles;
         List<Enemy> enemies;
@@ -22,18 +23,21 @@ namespace VizuelnoProgramiranjeGame
         bool keyRight;
         bool keyUp;
         bool keyDown;
+        bool keyShoot;
         bool pause;
         int score;
+        int screenWidth = Screen.PrimaryScreen.WorkingArea.Width;
+        int screenHeight = Screen.PrimaryScreen.WorkingArea.Height;
 
-        
 
         public Form1()
         {
-            //Form1.ActiveForm.WindowState = FormWindowState.Maximized;
+            
             this.WindowState = FormWindowState.Maximized;
             InitializeComponent();
-            
+            this.DoubleBuffered = true;
             startGame();
+
         }
         
         private void startGame()
@@ -47,6 +51,7 @@ namespace VizuelnoProgramiranjeGame
 
             mainTimer.Start();
             enemyTimer.Start();
+            
         }
 
         
@@ -55,45 +60,35 @@ namespace VizuelnoProgramiranjeGame
         //vo case-ot ne raboti, treba podobar fix od gorenavedeniot
         private void keyIsDown(object sender, KeyEventArgs e)
         {
+
             switch (e.KeyCode)
             {
+
                 case Keys.Left:
                     keyLeft = true;
-                    player.Move(playerControls.Left);
                     break;
 
                 case Keys.Right:
                     keyRight = true;
-                    player.Move(playerControls.Right);
+                    
                     break;
 
                 case Keys.Up:
                     keyUp = true;
-                    player.Move(playerControls.Up);
+                    
                     break;
 
                 case Keys.Down:
                     keyDown = true;
-                    player.Move(playerControls.Down);
                     break;
 
-                case Keys.Space: //moze podobro da se napravi ali me mrzi
-                    if (player.CooldownTimer.Elapsed.Seconds >= player.shootCooldown)
-                    {
-                        projectiles.Add(player.Shoot());
-                        player.CooldownTimer.Restart();
-                    }
+                case Keys.Z: //moze podobro da se napravi ali me mrzi
+                    keyShoot = true;
                     break;
 
-                
             }
 
-            if(keyUp && keyRight)
-            {
-                player.Move(playerControls.Right);
-                player.Move(playerControls.Up);
-            }
-            
+       
         }
 
         private void keyIsUp(object sender, KeyEventArgs e)
@@ -116,16 +111,15 @@ namespace VizuelnoProgramiranjeGame
                     keyDown = false;
                     break;
 
-                case Keys.Space:
-                    
+                case Keys.Z:
+                    keyShoot = false;
                     break;
             }
         }
 
         private void spawnEnemies()
         {
-            int screenWidth = Screen.PrimaryScreen.WorkingArea.Width;
-            int screenHeight = Screen.PrimaryScreen.WorkingArea.Height;
+            
             Random enemySpawnPoint = new Random();
             
             Enemy enemy = new Enemy(new Point(enemySpawnPoint.Next(1, screenWidth), 0));
@@ -133,24 +127,75 @@ namespace VizuelnoProgramiranjeGame
         }
         private void mainTimer_Tick(object sender, EventArgs e)
         {
+
             Invalidate(true);
 
-
             //proveruva dali igracot e pogoden vo sekoj tick
-            foreach (Enemy enemy in enemies)
+            for (int i = 0; i < enemies.Count; i++)
             {
-                if (player.isHit(enemy))
+                if (enemies[i].enemyHitbox.Y > screenHeight)
+                {
+                    enemies.RemoveAt(i);
+                }
+
+
+                if (player.isHit(enemies[i]))
                 {
                     startGame();
                 }
+
+                //idna iteracija dokolku sakam , piercing bullets samo mozam duplicat od forot vo poseben if bez projectiles.removeat;
+
+                for(int j = 0; j < projectiles.Count; j++)
+                {
+                    if (enemies[i].isHit(projectiles[j]))
+                    {
+                        score += 10;
+                        lblScore.Text = "Score:" + score;
+                        enemies.RemoveAt(i);
+                        projectiles.RemoveAt(j);
+                    }
+                }
+
+                
             }
+
+            //staven e delov ovde za da nema delay vo key press
+            if (keyUp)
+            {
+                player.Move(playerControls.Up);
+            }
+            if (keyDown)
+            {
+                player.Move(playerControls.Down);    
+            }
+            if (keyLeft)
+            {
+                player.Move(playerControls.Left);
+                
+            }
+            if (keyRight)
+            {
+                player.Move(playerControls.Right);
+                
+            }
+            if (keyShoot)
+            {   
+                if (player.CooldownTimer.Elapsed.Seconds >= player.shootCooldown)
+                {
+                    projectiles.Add(player.Shoot());
+                    player.CooldownTimer.Restart();
+                }
+            }
+
+            
         }
 
         //Spawn timer , treba malce tweaking za tezina na igrata
         private void enemyTimer_Tick(object sender, EventArgs e)
         {
             Random r = new Random();
-            enemyTimer.Interval = r.Next(300,3000);
+            enemyTimer.Interval = r.Next(300,1000);
             spawnEnemies();
         }
 
@@ -173,6 +218,8 @@ namespace VizuelnoProgramiranjeGame
                 p.Move();
                 p.Draw(e.Graphics);
             }
+
+
         }
 
     }

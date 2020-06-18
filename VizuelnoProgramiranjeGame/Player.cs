@@ -23,7 +23,6 @@ namespace VizuelnoProgramiranjeGame
         public Bitmap playerSprite;
         public Rectangle playerHitbox;
 
-
         public float shootCooldown = 1;
         public Stopwatch CooldownTimer;
 
@@ -38,7 +37,6 @@ namespace VizuelnoProgramiranjeGame
             this.playerHitbox.Y = this.center.Y;
             this.playerHitbox.Width = playerWidth;
             this.playerHitbox.Height = playerHeight;
-            
         }
     
         public void Draw(Graphics g)
@@ -49,7 +47,6 @@ namespace VizuelnoProgramiranjeGame
         //TODO: Cooldown treba na pukanje
         public Projectile Shoot()
         {
-            
             Projectile p = new Projectile(this.center);
             return p;
         }
@@ -66,22 +63,22 @@ namespace VizuelnoProgramiranjeGame
             switch (action)
             {
                 case playerControls.Up:
-                    this.center = new Point(center.X, center.Y - 12);
+                    this.center = new Point(center.X, center.Y - 6);
                     this.playerHitbox.Y = center.Y;
                     break;
 
                 case playerControls.Down:
-                    this.center = new Point(center.X, center.Y + 12);
+                    this.center = new Point(center.X, center.Y + 6);
                     this.playerHitbox.Y = center.Y;
                     break;
 
                 case playerControls.Left:
-                    this.center = new Point(center.X - 12, center.Y);
+                    this.center = new Point(center.X - 6, center.Y);
                     this.playerHitbox.X = center.X;
                     break;
 
                 case playerControls.Right:
-                    this.center = new Point(center.X + 12, center.Y);
+                    this.center = new Point(center.X + 6, center.Y);
                     this.playerHitbox.X = center.X;
                     break;
 

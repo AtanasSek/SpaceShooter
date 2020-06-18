@@ -37,5 +37,13 @@ namespace VizuelnoProgramiranjeGame
             center = new Point(center.X, center.Y + 4);
             enemyHitbox.Y = center.Y;
         }
+
+        public bool isHit(Projectile p)
+        {
+            if (this.enemyHitbox.IntersectsWith(p.projectileHitbox))
+                return true;
+            else return false;
+  
+        }
     }
 }

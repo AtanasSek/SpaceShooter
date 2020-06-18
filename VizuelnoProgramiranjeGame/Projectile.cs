@@ -11,9 +11,16 @@ namespace VizuelnoProgramiranjeGame
     {
         Point firingPoint;
         int projectileVelocity = 10;
+        public Rectangle projectileHitbox;
+        public int projectileWidth = 7;
+        public int projectileHeight = 15;
         public Projectile(Point firingPoint)
         {
             this.firingPoint = firingPoint;
+            projectileHitbox.X = firingPoint.X;
+            projectileHitbox.Y = firingPoint.Y;
+            projectileHitbox.Width = projectileWidth;
+            projectileHitbox.Height = projectileHeight;
         }
 
         public Point getFiringPoint()
@@ -24,7 +31,7 @@ namespace VizuelnoProgramiranjeGame
         public void Draw(Graphics g)
         {
             Brush brush = new SolidBrush(Color.Cyan);
-            g.FillEllipse(brush, firingPoint.X , firingPoint.Y , 7, 15);
+            g.FillEllipse(brush, firingPoint.X , firingPoint.Y , projectileWidth, projectileHeight);
             brush.Dispose();
             
         }
@@ -32,6 +39,7 @@ namespace VizuelnoProgramiranjeGame
         public void Move()
         {
             this.firingPoint.Y -= projectileVelocity;
+            this.projectileHitbox.Y -= projectileVelocity;
         }
     }
 }
