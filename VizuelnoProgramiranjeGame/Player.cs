@@ -44,10 +44,13 @@ namespace VizuelnoProgramiranjeGame
             g.DrawImage(image: playerSprite, center.X, center.Y, playerWidth, playerHeight);
         }
 
-        //TODO: Cooldown treba na pukanje
+        //ShootingPoint e kreirano so cel proektilot da doagja od centarot
         public Projectile Shoot()
         {
-            Projectile p = new Projectile(this.center);
+            Point shootingPoint = this.center;
+            shootingPoint.X = this.center.X + playerWidth/2;
+            Projectile p = new Projectile(shootingPoint);
+            p.isEnemyProjectile = false;
             return p;
         }
 
@@ -55,6 +58,15 @@ namespace VizuelnoProgramiranjeGame
         {
             if (enemy.enemyHitbox.IntersectsWith(playerHitbox))
                 return true;
+            else return false;
+        }
+
+        public bool isHit(Projectile p)
+        {
+            if (this.playerHitbox.IntersectsWith(p.projectileHitbox) && p.isEnemyProjectile)
+            {
+                return true;
+            }
             else return false;
         }
 

@@ -14,6 +14,9 @@ namespace VizuelnoProgramiranjeGame
         public Rectangle projectileHitbox;
         public int projectileWidth = 7;
         public int projectileHeight = 15;
+        public int projectileDamage = 1;
+        public bool isEnemyProjectile;
+
         public Projectile(Point firingPoint)
         {
             this.firingPoint = firingPoint;
@@ -38,8 +41,17 @@ namespace VizuelnoProgramiranjeGame
 
         public void Move()
         {
-            this.firingPoint.Y -= projectileVelocity;
-            this.projectileHitbox.Y -= projectileVelocity;
+            if (isEnemyProjectile)
+            {
+                this.firingPoint.Y += projectileVelocity;
+                this.projectileHitbox.Y += projectileVelocity;
+            }
+            else
+            {
+                this.firingPoint.Y -= projectileVelocity;
+                this.projectileHitbox.Y -= projectileVelocity;
+            }
+            
         }
     }
 }

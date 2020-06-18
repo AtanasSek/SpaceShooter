@@ -33,15 +33,19 @@
             this.mainTimer = new System.Windows.Forms.Timer(this.components);
             this.lblTimer = new System.Windows.Forms.Label();
             this.enemyTimer = new System.Windows.Forms.Timer(this.components);
+            this.enemyProjectileTimer = new System.Windows.Forms.Timer(this.components);
+            this.bossTimer = new System.Windows.Forms.Timer(this.components);
+            this.bossBattleTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // lblScore
             // 
             this.lblScore.AutoSize = true;
             this.lblScore.ForeColor = System.Drawing.Color.White;
-            this.lblScore.Location = new System.Drawing.Point(12, 9);
+            this.lblScore.Location = new System.Drawing.Point(16, 11);
+            this.lblScore.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblScore.Name = "lblScore";
-            this.lblScore.Size = new System.Drawing.Size(47, 13);
+            this.lblScore.Size = new System.Drawing.Size(61, 17);
             this.lblScore.TabIndex = 0;
             this.lblScore.Text = "Score: 0";
             // 
@@ -55,10 +59,9 @@
             // 
             this.lblTimer.AutoSize = true;
             this.lblTimer.ForeColor = System.Drawing.Color.White;
-            this.lblTimer.Location = new System.Drawing.Point(74, 9);
-            this.lblTimer.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTimer.Location = new System.Drawing.Point(99, 11);
             this.lblTimer.Name = "lblTimer";
-            this.lblTimer.Size = new System.Drawing.Size(36, 13);
+            this.lblTimer.Size = new System.Drawing.Size(48, 17);
             this.lblTimer.TabIndex = 1;
             this.lblTimer.Text = "Timer ";
             // 
@@ -67,14 +70,32 @@
             this.enemyTimer.Interval = 3000;
             this.enemyTimer.Tick += new System.EventHandler(this.enemyTimer_Tick);
             // 
+            // enemyProjectileTimer
+            // 
+            this.enemyProjectileTimer.Enabled = true;
+            this.enemyProjectileTimer.Interval = 2000;
+            this.enemyProjectileTimer.Tick += new System.EventHandler(this.enemyProjectileTimer_Tick);
+            // 
+            // bossTimer
+            // 
+            this.bossTimer.Enabled = true;
+            this.bossTimer.Interval = 1000;
+            this.bossTimer.Tick += new System.EventHandler(this.bossTimer_Tick);
+            // 
+            // bossBattleTimer
+            // 
+            this.bossBattleTimer.Interval = 10;
+            this.bossBattleTimer.Tick += new System.EventHandler(this.bossBattleTimer_Tick);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.lblTimer);
             this.Controls.Add(this.lblScore);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Alien Shooter placeholder";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
@@ -91,6 +112,9 @@
         private System.Windows.Forms.Timer mainTimer;
         private System.Windows.Forms.Label lblTimer;
         private System.Windows.Forms.Timer enemyTimer;
+        private System.Windows.Forms.Timer enemyProjectileTimer;
+        private System.Windows.Forms.Timer bossTimer;
+        private System.Windows.Forms.Timer bossBattleTimer;
     }
 }
 
