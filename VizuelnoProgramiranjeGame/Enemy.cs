@@ -94,17 +94,6 @@ namespace VizuelnoProgramiranjeGame
         {
             return this.hitpoints;
         }
-        
-        //Mora posebna klasa, nema drug nacin, premnogu kompleksno ke bide ako ne go napravam taka
-        public void MoveBoss()
-        {
-            if(this.center.Y != 0)
-            {
-                center = new Point(center.X, center.Y + this.enemySpeed);
-                enemyHitbox.Y = center.Y;
-            }
-            
-        }
 
         public void Move()
         {

@@ -91,5 +91,14 @@
   <ItemGroup>
     <None Include="Resources\ESprite.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Audio\Wide Putin Walking %28online-audio-converter.com%29.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Audio\Wide Putin Walking.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

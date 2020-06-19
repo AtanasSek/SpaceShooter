@@ -79,5 +79,34 @@ namespace VizuelnoProgramiranjeGame.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Screenshot_1 {
+            get {
+                object obj = ResourceManager.GetObject("Screenshot_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Wide_Putin_Walking {
+            get {
+                object obj = ResourceManager.GetObject("Wide_Putin_Walking", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Wide_Putin_Walking__online_audio_converter_com_ {
+            get {
+                return ResourceManager.GetStream("Wide_Putin_Walking__online_audio_converter_com_", resourceCulture);
+            }
+        }
     }
 }

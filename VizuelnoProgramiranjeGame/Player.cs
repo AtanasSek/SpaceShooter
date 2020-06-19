@@ -22,9 +22,11 @@ namespace VizuelnoProgramiranjeGame
         public static readonly int playerWidth = 50;
         public Bitmap playerSprite;
         public Rectangle playerHitbox;
+        public int hitpoints = 1;
 
         public float shootCooldown = 1;
         public Stopwatch CooldownTimer;
+        
 
         public Player(Point center)
         {
@@ -57,6 +59,13 @@ namespace VizuelnoProgramiranjeGame
         public bool isHit(Enemy enemy)
         {
             if (enemy.enemyHitbox.IntersectsWith(playerHitbox))
+                return true;
+            else return false;
+        }
+
+        public bool isHit(Boss boss)
+        {
+            if (boss.bossHitbox.IntersectsWith(playerHitbox))
                 return true;
             else return false;
         }

@@ -12,7 +12,7 @@ namespace VizuelnoProgramiranjeGame
     class Boss
     {
         Point center;
-        Rectangle bossHitbox;
+        public Rectangle bossHitbox;
         Bitmap bossSprite;
         int hitpoints;
         int width;
@@ -30,7 +30,48 @@ namespace VizuelnoProgramiranjeGame
             this.bossHitbox.Y = this.center.Y;
             this.bossHitbox.Width = width;
             this.bossHitbox.Height = height;
-            this.bossSpeed = 1;
+            this.bossSpeed = 1; 
+        }
+
+        public void Draw(Graphics g)
+        {
+            g.DrawImage(image: bossSprite, center.X, center.Y, width, height);
+        }
+
+        public void Damage(Projectile p)
+        {
+            this.hitpoints -= p.projectileDamage;
+        }
+
+        public int getHitPoints()
+        {
+            return this.hitpoints;
+        }
+
+        public void Move()
+        {
+            if (this.center.Y != 0)
+            {
+                center = new Point(center.X, center.Y + this.bossSpeed);
+                bossHitbox.Y = center.Y;
+            }
+        }
+        public Projectile Shoot()
+        {
+            Point shootingPoint = this.center;
+            shootingPoint.X = this.center.X + width / 2;
+            Projectile p = new Projectile(shootingPoint);
+            p.isEnemyProjectile = true;
+            return p;
+        }
+
+        public bool isHit(Projectile p)
+        {
+            if (this.bossHitbox.IntersectsWith(p.projectileHitbox) && !p.isEnemyProjectile)
+            {
+                return true;
+            }
+            else return false;
         }
     }
 }

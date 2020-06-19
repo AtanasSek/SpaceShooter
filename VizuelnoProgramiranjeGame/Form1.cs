@@ -5,20 +5,25 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using VizuelnoProgramiranjeGame.Properties;
 
 namespace VizuelnoProgramiranjeGame
 {
+
+    // Vo retrospekcija , ke bese poubavo da napravam klasa od koja sto boss,enemy i player ke nasleduvaat.
     public partial class Form1 : Form
     {
         
         Player player;
         List<Projectile> projectiles;
         List<Enemy> enemies;
+        List<Boss> bosses;
         bool isEnemyAllowedToSpawn;
         bool keyLeft;
         bool keyRight;
@@ -39,7 +44,6 @@ namespace VizuelnoProgramiranjeGame
             //this.FormBorderStyle = FormBorderStyle.None;
             screenWidth = Screen.PrimaryScreen.Bounds.Width;//Screen.PrimaryScreen.WorkingArea.Width;
             screenHeight = Screen.PrimaryScreen.Bounds.Height;//Screen.PrimaryScreen.WorkingArea.Height;
-
             InitializeComponent();
             this.DoubleBuffered = true;
             startGame();
@@ -51,12 +55,12 @@ namespace VizuelnoProgramiranjeGame
             player = new Player(new Point(Screen.PrimaryScreen.WorkingArea.Width / 2, Screen.PrimaryScreen.WorkingArea.Height / 2));
             projectiles = new List<Projectile>();
             enemies = new List<Enemy>();
+            bosses = new List<Boss>();
             randSeed = new Random();
             isEnemyAllowedToSpawn = true;
 
-            Console.WriteLine("screenWidth" + screenWidth);
-            Console.WriteLine("ScreenHeight" + screenHeight);
-            bossCountDown = 4;
+          
+            bossCountDown = 0;
             lblTimer.Text = "ETA: " + bossCountDown;
 
             score = 0;
@@ -68,7 +72,14 @@ namespace VizuelnoProgramiranjeGame
             enemyTimer.Interval = 3000; //delayed start na neprijateli
         }
 
-        
+
+        //Preglasno, nema api za zvuk
+        private void playMusic()
+        {
+            SoundPlayer bossMusic = new SoundPlayer(Resources.Wide_Putin_Walking__online_audio_converter_com_);
+            bossMusic.Play();
+        }
+
         //controls
         //poradi nekoja pricina , so booleanite (pr. keyUp && keyRight) se dvizi dijagonalno ako kreiram poseben if, ali 
         //vo case-ot ne raboti, treba podobar fix od gorenavedeniot
@@ -158,12 +169,10 @@ namespace VizuelnoProgramiranjeGame
             }   
             
         }
-        private void mainTimer_Tick(object sender, EventArgs e)
+
+        //HIT DETECTION ZA ENEMIES,PLAYER I PROEKTILI POVRZANI SO NIV
+        public void enemyCollisionLogic()
         {
-
-            Invalidate(true);
-
-            //HIT DETECTION ZA ENEMIES I PROEKTILI POVRZANI SO NIV
             for (int i = 0; i < enemies.Count; i++)
             {
 
@@ -176,13 +185,13 @@ namespace VizuelnoProgramiranjeGame
 
                 //Hit detection za enemies
                 if (player.isHit(enemies[i]))
-                {                  
+                {
                     startGame();
-                     //mora break inace ke vadi out of bounds
+                    //mora break inace ke vadi out of bounds
                 }
                 //idna iteracija dokolku sakam , piercing bullets samo mozam duplicat od forot vo poseben if bez projectiles.removeat;
 
-                //Hit detection za proektili
+                //Hit detection za proektili od enemies i player
                 for (int j = 0; j < projectiles.Count; j++)
                 {
 
@@ -190,30 +199,30 @@ namespace VizuelnoProgramiranjeGame
                     {
 
                         enemies[i].Damage(projectiles[j]);
-                            if (enemies[i].getHitPoints() <= 0)
-                            {
+                        if (enemies[i].getHitPoints() <= 0)
+                        {
 
-                                if (enemies[i].type == Type.Regular)
-                                {
-                                    score += 10;
-                                    lblScore.Text = "Score:" + score;
-                                }
-                                else if (enemies[i].type == Type.Shooter)
-                                {
-                                    score += 20;
-                                    lblScore.Text = "Score:" + score;
-                                }
-                                else if (enemies[i].type == Type.Tanky)
-                                {
-                                    score += 30;
-                                    lblScore.Text = "Score:" + score;
-                                }
-                                enemies.RemoveAt(i);
-                                
+                            if (enemies[i].type == Type.Regular)
+                            {
+                                score += 10;
+                                lblScore.Text = "Score:" + score;
                             }
+                            else if (enemies[i].type == Type.Shooter)
+                            {
+                                score += 20;
+                                lblScore.Text = "Score:" + score;
+                            }
+                            else if (enemies[i].type == Type.Tanky)
+                            {
+                                score += 30;
+                                lblScore.Text = "Score:" + score;
+                            }
+                            enemies.RemoveAt(i);
+
+                        }
 
                         projectiles.RemoveAt(j);
-                        
+
                     }
                     else if (player.isHit(projectiles[j]))
                     {
@@ -221,36 +230,80 @@ namespace VizuelnoProgramiranjeGame
                     }
 
                 }
-               
-            }
 
-            //staven e delov ovde za da nema delay vo key press
+            }
+        }
+
+        //HIT DETECTION ZA BOSS,PLAYER I PROEKTILI POVRZANI SO NIV
+        public void bossCollisionLogic()
+        {
+            for (int i = 0; i < bosses.Count; i++)
+            {
+                if (player.isHit(bosses[i]))
+                {
+                    startGame();
+                }
+                for (int j = 0; j < projectiles.Count; j++)
+                {
+                    if (bosses[i].isHit(projectiles[j]))
+                    {
+                        bosses[i].Damage(projectiles[j]);
+                        projectiles.RemoveAt(j);
+                        if (bosses[i].getHitPoints() <= 0)
+                        {
+                            startGame();
+                        }
+                    }
+                    else if(player.isHit(projectiles[j]))
+                    {
+                        startGame();
+                    }
+                }
+            }
+        }
+        
+        //Player controls
+        public void keyPress()
+        {
             if (keyUp)
             {
                 player.Move(playerControls.Up);
             }
             if (keyDown)
             {
-                player.Move(playerControls.Down);    
+                player.Move(playerControls.Down);
             }
             if (keyLeft)
             {
                 player.Move(playerControls.Left);
-                
+
             }
             if (keyRight)
             {
                 player.Move(playerControls.Right);
-                
+
             }
             if (keyShoot)
-            {   
+            {
                 if (player.CooldownTimer.Elapsed.Seconds >= player.shootCooldown)
                 {
                     projectiles.Add(player.Shoot());
                     player.CooldownTimer.Restart();
                 }
             }
+        }
+        private void mainTimer_Tick(object sender, EventArgs e)
+        {
+
+            Invalidate(true);
+
+            //Losa implementacija, nema vreme za podobra
+            //HIT DETECTION ZA ENEMIES,PLAYER I PROEKTILI POVRZANI SO NIV
+            enemyCollisionLogic();
+            bossCollisionLogic();
+
+            //staven e delov ovde za da nema delay vo key press
+            keyPress();
             
         }
 
@@ -262,8 +315,22 @@ namespace VizuelnoProgramiranjeGame
                 enemyTimer.Interval = randSeed.Next(300,1000);
                 spawnEnemies();
             }
+            else
+            {
+                if (!enemies.Any() && !bosses.Any())
+                {
+                    //potrebno e boss muzika i da se spavne
+                    Point spawnPoint = new Point(screenWidth / 4, -300);
+                    Boss boss = new Boss(spawnPoint, screenWidth / 2, screenHeight / 4);
+                    bosses.Add(boss);
+                    //playMusic();
+
+                }
+            }
         }
 
+
+        //patern na pukanje za neprijateli
         private void enemyProjectileTimer_Tick(object sender, EventArgs e)
         {
 
@@ -274,6 +341,12 @@ namespace VizuelnoProgramiranjeGame
                 {
                     projectiles.Add(enemy.Shoot());
                 }
+            }
+
+            foreach(Boss boss in bosses)
+            {
+                enemyProjectileTimer.Interval = randSeed.Next(2000,4000);
+                projectiles.Add(boss.Shoot());
             }
 
         }
@@ -290,6 +363,12 @@ namespace VizuelnoProgramiranjeGame
             {
                 enemy.Move();
                 enemy.Draw(e.Graphics);
+            }
+
+            foreach(Boss boss in bosses)
+            {
+                boss.Move();
+                boss.Draw(e.Graphics);
             }
             
             foreach(Projectile p in projectiles)
@@ -311,15 +390,6 @@ namespace VizuelnoProgramiranjeGame
             else
             {
                 isEnemyAllowedToSpawn = false;
-                if (!enemies.Any())
-                {
-                    //potrebno e boss muzika i da se spavne
-                    Point spawnPoint = new Point(screenWidth / 4, -300);
-
-                    Enemy boss = new Enemy(spawnPoint, screenWidth / 2, screenHeight / 4);
-                    enemies.Add(boss);
-
-                }
             }
             
         }
