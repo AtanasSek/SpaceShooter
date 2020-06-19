@@ -10,102 +10,77 @@ using VizuelnoProgramiranjeGame.Properties;
 namespace VizuelnoProgramiranjeGame
 {
     public enum Type { Regular, Tanky, Shooter }
-    class Enemy
+    class Enemy : Spaceship
     {
-        Point center;
-        int enemyWidth;
-        int enemyHeight;
-        int hitpoints;
-        int enemySpeed;
 
         public Type type;
-        public Bitmap enemySprite;
-        public Rectangle enemyHitbox;
-        
 
         public Enemy(Point center, Type type)
         {
-            this.center = center;
-            enemySprite = new Bitmap(Resources.ESprite);
+            base.center = center;
+            base.sprite = new Bitmap(Resources.ESprite);
 
-            this.enemyHitbox.X = this.center.X;
-            this.enemyHitbox.Y = this.center.Y;
+            base.hitbox.X = base.center.X;
+            base.hitbox.Y = base.center.Y;
             
             this.type = type;
 
             switch (type)
             {
                 case Type.Regular:
-                    this.hitpoints = 1;
-                    this.enemyWidth = 30;
-                    this.enemyHeight = 30;
-                    this.enemyHitbox.Width = enemyWidth;
-                    this.enemyHitbox.Height = enemyHeight;
-                    this.enemySpeed = 3;
+                    base.hitpoints = 1;
+                    base.width = 30;
+                    base.height = 30;
+                    
+                    base.speed = 3;
                     break;
 
                 case Type.Tanky:
-                    this.hitpoints = 3;
-                    this.enemyWidth = 80;
-                    this.enemyHeight = 60;
-                    this.enemyHitbox.Width = enemyWidth;
-                    this.enemyHitbox.Height = enemyHeight;
-                    this.enemySpeed = 1;
+                    base.hitpoints = 3;
+                    base.width = 80;
+                    base.height = 60;
+                    base.speed = 1;
                     break;
 
                 case Type.Shooter:
-                    this.hitpoints = 1;
-                    this.enemyWidth = 40;
-                    this.enemyHeight = 40;
-                    this.enemyHitbox.Width = enemyWidth;
-                    this.enemyHitbox.Height = enemyHeight;
-                    this.enemySpeed = 2;
+                    base.hitpoints = 1;
+                    base.width = 40;
+                    base.height = 40;
+                    base.speed = 2;
                     break;
             }
+
+            base.hitbox.Width = base.width;
+            base.hitbox.Height = base.height;
         }
 
         //Treba da se dovrsi boss klasata i posle ova ke bide deprecated
         public Enemy(Point center,int width, int height)
         {
-            this.center = center;
-            enemySprite = new Bitmap(Resources.ESprite);
+            base.center = center;
+            base.sprite = new Bitmap(Resources.ESprite);
 
-            this.hitpoints = 3;
-            this.enemyWidth = width;
-            this.enemyHeight = height;
-            this.enemyHitbox.X = this.center.X;
-            this.enemyHitbox.Y = this.center.Y;
-            this.enemyHitbox.Width = width;
-            this.enemyHitbox.Height = height;
-            this.enemySpeed = 1;
-        }
-
-        public void Draw(Graphics g)
-        {
-            g.DrawImage(image: enemySprite, center.X, center.Y, enemyWidth, enemyHeight);
-        }
-
-        public void Damage(Projectile p)
-        {
-            this.hitpoints -= p.projectileDamage;
-        }
-
-        public int getHitPoints()
-        {
-            return this.hitpoints;
+            base.hitpoints = 3;
+            base.width = width;
+            base.height = height;
+            base.hitbox.X = this.center.X;
+            base.hitbox.Y = this.center.Y;
+            base.hitbox.Width = width;
+            base.hitbox.Height = height;
+            base.speed = 1;
         }
 
         public void Move()
         {
-            center = new Point(center.X, center.Y + this.enemySpeed);
-            enemyHitbox.Y = center.Y;
+            base.center = new Point(center.X, center.Y + base.speed);
+            base.hitbox.Y = base.center.Y;
         }
 
         //ShootingPoint e kreirano so cel proektilot da doagja od centarot
-        public Projectile Shoot()
+        public override Projectile Shoot()
         {
-            Point shootingPoint = this.center;
-            shootingPoint.X = this.center.X + enemyWidth/2;
+            Point shootingPoint = base.center;
+            shootingPoint.X = base.center.X + base.width/2;
             Projectile p = new Projectile(shootingPoint);
             p.isEnemyProjectile = true;
             return p;
@@ -114,7 +89,7 @@ namespace VizuelnoProgramiranjeGame
         public bool isHit(Projectile p)
         {
 
-            if (this.enemyHitbox.IntersectsWith(p.projectileHitbox) && !p.isEnemyProjectile)
+            if (base.hitbox.IntersectsWith(p.projectileHitbox) && !p.isEnemyProjectile)
             {
                 return true;
             }

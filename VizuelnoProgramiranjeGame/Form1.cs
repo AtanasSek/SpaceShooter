@@ -60,7 +60,7 @@ namespace VizuelnoProgramiranjeGame
             isEnemyAllowedToSpawn = true;
 
           
-            bossCountDown = 0;
+            bossCountDown = 20;
             lblTimer.Text = "ETA: " + bossCountDown;
 
             score = 0;
@@ -80,67 +80,7 @@ namespace VizuelnoProgramiranjeGame
             bossMusic.Play();
         }
 
-        //controls
-        //poradi nekoja pricina , so booleanite (pr. keyUp && keyRight) se dvizi dijagonalno ako kreiram poseben if, ali 
-        //vo case-ot ne raboti, treba podobar fix od gorenavedeniot
-        private void keyIsDown(object sender, KeyEventArgs e)
-        {
-
-            switch (e.KeyCode)
-            {
-
-                case Keys.Left:
-                    keyLeft = true;
-                    break;
-
-                case Keys.Right:
-                    keyRight = true;
-                    
-                    break;
-
-                case Keys.Up:
-                    keyUp = true;
-                    
-                    break;
-
-                case Keys.Down:
-                    keyDown = true;
-                    break;
-
-                case Keys.Z: //moze podobro da se napravi ali me mrzi
-                    keyShoot = true;
-                    break;
-
-            }
-
-       
-        }
-
-        private void keyIsUp(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.Left:
-                    keyLeft = false;
-                    break;
-
-                case Keys.Right:
-                    keyRight = false;
-                    break;
-
-                case Keys.Up:
-                    keyUp = false;
-                    break;
-
-                case Keys.Down:
-                    keyDown = false;
-                    break;
-
-                case Keys.Z:
-                    keyShoot = false;
-                    break;
-            }
-        }
+        
 
 
         //Spawnrates za sekoj tip na enemy
@@ -177,7 +117,7 @@ namespace VizuelnoProgramiranjeGame
             {
 
                 //Se brisat enemies offscreen , mora continue inace ke iterira posle vo index koj sto e prazen
-                if (enemies[i].enemyHitbox.Y > screenHeight)
+                if (enemies[i].hitbox.Y > screenHeight)
                 {
                     enemies.RemoveAt(i);
                     continue;
@@ -261,8 +201,69 @@ namespace VizuelnoProgramiranjeGame
                 }
             }
         }
+
         
-        //Player controls
+        //controls
+        //poradi nekoja pricina , so booleanite (pr. keyUp && keyRight) se dvizi dijagonalno ako kreiram poseben if, ali 
+        //vo case-ot ne raboti, treba podobar fix od gorenavedeniot
+        private void keyIsDown(object sender, KeyEventArgs e)
+        {
+
+            switch (e.KeyCode)
+            {
+
+                case Keys.Left:
+                    keyLeft = true;
+                    break;
+
+                case Keys.Right:
+                    keyRight = true;
+
+                    break;
+
+                case Keys.Up:
+                    keyUp = true;
+
+                    break;
+
+                case Keys.Down:
+                    keyDown = true;
+                    break;
+
+                case Keys.Z: //moze podobro da se napravi ali me mrzi
+                    keyShoot = true;
+                    break;
+
+            }
+
+
+        }
+        private void keyIsUp(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Left:
+                    keyLeft = false;
+                    break;
+
+                case Keys.Right:
+                    keyRight = false;
+                    break;
+
+                case Keys.Up:
+                    keyUp = false;
+                    break;
+
+                case Keys.Down:
+                    keyDown = false;
+                    break;
+
+                case Keys.Z:
+                    keyShoot = false;
+                    break;
+            }
+        }
+        //Metodov postoi samo za da bide iskoristen vo mainTimer_Tick za da nema delay vo akciite na igracot
         public void keyPress()
         {
             if (keyUp)
@@ -353,7 +354,6 @@ namespace VizuelnoProgramiranjeGame
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-
             player.Draw(e.Graphics);
 
             //Brzina na neprijateli i proektili e povrzana so MainTimer tick interval, mozebi da se napravi

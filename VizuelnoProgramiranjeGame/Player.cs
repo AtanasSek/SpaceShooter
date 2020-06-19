@@ -15,42 +15,33 @@ namespace VizuelnoProgramiranjeGame
     {
         Up,Down,Left,Right
     }
-    class Player
+    class Player : Spaceship
     {
-        public Point center;
-        public static readonly int playerHeight = 50;
-        public static readonly int playerWidth = 50;
-        public Bitmap playerSprite;
-        public Rectangle playerHitbox;
-        public int hitpoints = 1;
-
-        public float shootCooldown = 1;
-        public Stopwatch CooldownTimer;
-        
 
         public Player(Point center)
         {
-            this.center = center;
-            this.playerSprite = new Bitmap(Resources.PSprite);
+            base.center = center;
+            base.sprite = new Bitmap(Resources.PSprite);
             this.CooldownTimer = new Stopwatch();
             this.CooldownTimer.Start();
 
-            this.playerHitbox.X = this.center.X;
-            this.playerHitbox.Y = this.center.Y;
-            this.playerHitbox.Width = playerWidth;
-            this.playerHitbox.Height = playerHeight;
+            base.width = 50;
+            base.height = 50;
+
+            base.hitbox.X = this.center.X;
+            base.hitbox.Y = this.center.Y;
+            base.hitbox.Width = base.width;
+            base.hitbox.Height = base.height;
         }
     
-        public void Draw(Graphics g)
-        {
-            g.DrawImage(image: playerSprite, center.X, center.Y, playerWidth, playerHeight);
-        }
+        
 
         //ShootingPoint e kreirano so cel proektilot da doagja od centarot
-        public Projectile Shoot()
+        
+        public override Projectile Shoot()
         {
             Point shootingPoint = this.center;
-            shootingPoint.X = this.center.X + playerWidth/2;
+            shootingPoint.X = this.center.X + width/2;
             Projectile p = new Projectile(shootingPoint);
             p.isEnemyProjectile = false;
             return p;
@@ -58,21 +49,21 @@ namespace VizuelnoProgramiranjeGame
 
         public bool isHit(Enemy enemy)
         {
-            if (enemy.enemyHitbox.IntersectsWith(playerHitbox))
+            if (enemy.hitbox.IntersectsWith(hitbox))
                 return true;
             else return false;
         }
 
         public bool isHit(Boss boss)
         {
-            if (boss.bossHitbox.IntersectsWith(playerHitbox))
+            if (boss.hitbox.IntersectsWith(hitbox))
                 return true;
             else return false;
         }
 
         public bool isHit(Projectile p)
         {
-            if (this.playerHitbox.IntersectsWith(p.projectileHitbox) && p.isEnemyProjectile)
+            if (this.hitbox.IntersectsWith(p.projectileHitbox) && p.isEnemyProjectile)
             {
                 return true;
             }
@@ -84,23 +75,23 @@ namespace VizuelnoProgramiranjeGame
             switch (action)
             {
                 case playerControls.Up:
-                    this.center = new Point(center.X, center.Y - 6);
-                    this.playerHitbox.Y = center.Y;
+                    base.center = new Point(center.X, center.Y - 6);
+                    base.hitbox.Y = center.Y;
                     break;
 
                 case playerControls.Down:
-                    this.center = new Point(center.X, center.Y + 6);
-                    this.playerHitbox.Y = center.Y;
+                    base.center = new Point(center.X, center.Y + 6);
+                    base.hitbox.Y = center.Y;
                     break;
 
                 case playerControls.Left:
-                    this.center = new Point(center.X - 6, center.Y);
-                    this.playerHitbox.X = center.X;
+                    base.center = new Point(center.X - 6, center.Y);
+                    base.hitbox.X = center.X;
                     break;
 
                 case playerControls.Right:
-                    this.center = new Point(center.X + 6, center.Y);
-                    this.playerHitbox.X = center.X;
+                    base.center = new Point(center.X + 6, center.Y);
+                    base.hitbox.X = center.X;
                     break;
 
             }

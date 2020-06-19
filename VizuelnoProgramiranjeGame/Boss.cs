@@ -9,57 +9,36 @@ using VizuelnoProgramiranjeGame.Properties;
 namespace VizuelnoProgramiranjeGame
 {
     //Nedovrsena klasa
-    class Boss
+    class Boss : Spaceship
     {
-        Point center;
-        public Rectangle bossHitbox;
-        Bitmap bossSprite;
-        int hitpoints;
-        int width;
-        int height;
-        int bossSpeed;
+        
         public Boss(Point center, int width, int height)
         {
-            this.center = center;
-            bossSprite = new Bitmap(Resources.ESprite);
+            base.center = center;
+            base.sprite = new Bitmap(Resources.ESprite);
 
-            this.hitpoints = 3;
-            this.width = width;
-            this.height = height;
-            this.bossHitbox.X = this.center.X;
-            this.bossHitbox.Y = this.center.Y;
-            this.bossHitbox.Width = width;
-            this.bossHitbox.Height = height;
-            this.bossSpeed = 1; 
-        }
-
-        public void Draw(Graphics g)
-        {
-            g.DrawImage(image: bossSprite, center.X, center.Y, width, height);
-        }
-
-        public void Damage(Projectile p)
-        {
-            this.hitpoints -= p.projectileDamage;
-        }
-
-        public int getHitPoints()
-        {
-            return this.hitpoints;
+            base.hitpoints = 3;
+            base.width = width;
+            base.height = height;
+            base.hitbox.X = base.center.X;
+            base.hitbox.Y = base.center.Y;
+            base.hitbox.Width = width;
+            base.hitbox.Height = height;
+            base.speed = 1; 
         }
 
         public void Move()
         {
-            if (this.center.Y != 0)
+            if (base.center.Y != 0)
             {
-                center = new Point(center.X, center.Y + this.bossSpeed);
-                bossHitbox.Y = center.Y;
+                base.center = new Point(base.center.X, base.center.Y + base.speed);
+                base.hitbox.Y = base.center.Y;
             }
         }
-        public Projectile Shoot()
+        public override Projectile Shoot()
         {
-            Point shootingPoint = this.center;
-            shootingPoint.X = this.center.X + width / 2;
+            Point shootingPoint = base.center;
+            shootingPoint.X = base.center.X + width / 2;
             Projectile p = new Projectile(shootingPoint);
             p.isEnemyProjectile = true;
             return p;
@@ -67,7 +46,7 @@ namespace VizuelnoProgramiranjeGame
 
         public bool isHit(Projectile p)
         {
-            if (this.bossHitbox.IntersectsWith(p.projectileHitbox) && !p.isEnemyProjectile)
+            if (this.hitbox.IntersectsWith(p.projectileHitbox) && !p.isEnemyProjectile)
             {
                 return true;
             }
