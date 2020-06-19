@@ -35,22 +35,6 @@ namespace VizuelnoProgramiranjeGame
                 base.hitbox.Y = base.center.Y;
             }
         }
-        public override Projectile Shoot()
-        {
-            Point shootingPoint = base.center;
-            shootingPoint.X = base.center.X + width / 2;
-            Projectile p = new Projectile(shootingPoint);
-            p.isEnemyProjectile = true;
-            return p;
-        }
-
-        public bool isHit(Projectile p)
-        {
-            if (this.hitbox.IntersectsWith(p.projectileHitbox) && !p.isEnemyProjectile)
-            {
-                return true;
-            }
-            else return false;
-        }
+        
     }
 }

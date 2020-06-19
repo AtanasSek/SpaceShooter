@@ -24,6 +24,7 @@ namespace VizuelnoProgramiranjeGame
         List<Projectile> projectiles;
         List<Enemy> enemies;
         List<Boss> bosses;
+        List<SpaceDebris> spaceDebris;
         bool isEnemyAllowedToSpawn;
         bool keyLeft;
         bool keyRight;
@@ -36,29 +37,33 @@ namespace VizuelnoProgramiranjeGame
         int screenHeight;
         Random randSeed;
         int bossCountDown;
+        Bitmap background;
+        
 
         public Form1()
         {
 
             this.WindowState = FormWindowState.Maximized;
-            //this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;
             screenWidth = Screen.PrimaryScreen.Bounds.Width;//Screen.PrimaryScreen.WorkingArea.Width;
             screenHeight = Screen.PrimaryScreen.Bounds.Height;//Screen.PrimaryScreen.WorkingArea.Height;
             InitializeComponent();
             this.DoubleBuffered = true;
+            this.background = new Bitmap(Resources.PixelGalaxy1);
+            
             startGame();
-
+            
         }
-        
+
         private void startGame()
         {
             player = new Player(new Point(Screen.PrimaryScreen.WorkingArea.Width / 2, Screen.PrimaryScreen.WorkingArea.Height / 2));
             projectiles = new List<Projectile>();
             enemies = new List<Enemy>();
             bosses = new List<Boss>();
+            spaceDebris = new List<SpaceDebris>();
             randSeed = new Random();
             isEnemyAllowedToSpawn = true;
-
           
             bossCountDown = 20;
             lblTimer.Text = "ETA: " + bossCountDown;
@@ -72,8 +77,9 @@ namespace VizuelnoProgramiranjeGame
             enemyTimer.Interval = 3000; //delayed start na neprijateli
         }
 
+        
 
-        //Preglasno, nema api za zvuk
+        //Preglasno, nema metodi za zvuk
         private void playMusic()
         {
             SoundPlayer bossMusic = new SoundPlayer(Resources.Wide_Putin_Walking__online_audio_converter_com_);
@@ -113,6 +119,10 @@ namespace VizuelnoProgramiranjeGame
         //HIT DETECTION ZA ENEMIES,PLAYER I PROEKTILI POVRZANI SO NIV
         public void enemyCollisionLogic()
         {
+            if (player.hitpoints <= 0)
+            {
+                startGame();
+            }
             for (int i = 0; i < enemies.Count; i++)
             {
 
@@ -123,11 +133,11 @@ namespace VizuelnoProgramiranjeGame
                     continue;
                 }
 
-                //Hit detection za enemies
+                //Hit detection za kolizija
                 if (player.isHit(enemies[i]))
                 {
-                    startGame();
-                    //mora break inace ke vadi out of bounds
+                    player.PureDamage(enemies[i].hitpoints);
+                    enemies.RemoveAt(i);
                 }
                 //idna iteracija dokolku sakam , piercing bullets samo mozam duplicat od forot vo poseben if bez projectiles.removeat;
 
@@ -139,7 +149,7 @@ namespace VizuelnoProgramiranjeGame
                     {
 
                         enemies[i].Damage(projectiles[j]);
-                        if (enemies[i].getHitPoints() <= 0)
+                        if (enemies[i].hitpoints <= 0)
                         {
 
                             if (enemies[i].type == Type.Regular)
@@ -166,7 +176,10 @@ namespace VizuelnoProgramiranjeGame
                     }
                     else if (player.isHit(projectiles[j]))
                     {
-                        startGame();
+                        
+                        player.Damage(projectiles[j]);
+                        projectiles.RemoveAt(j);
+                                           
                     }
 
                 }
@@ -189,7 +202,7 @@ namespace VizuelnoProgramiranjeGame
                     {
                         bosses[i].Damage(projectiles[j]);
                         projectiles.RemoveAt(j);
-                        if (bosses[i].getHitPoints() <= 0)
+                        if (bosses[i].hitpoints <= 0)
                         {
                             startGame();
                         }
@@ -352,14 +365,25 @@ namespace VizuelnoProgramiranjeGame
 
         }
 
+        
+
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            //backgroundot laguva mnogu ako e kompresiran, treba da se najde pogolema slika sto izgleda ok
+            e.Graphics.DrawImage(background, 0 ,0 ); //screenwidth i screenheight za test
+            foreach(SpaceDebris particle in spaceDebris)
+            {
+                particle.Draw(e.Graphics);
+                particle.Move();
+            }
             player.Draw(e.Graphics);
+            player.DrawHUD(e.Graphics);
+            
 
             //Brzina na neprijateli i proektili e povrzana so MainTimer tick interval, mozebi da se napravi
             //poseben timer za da se namali ili zgolemi tezina?
             //se spravuvam vo dvizenjeto vo form1_paint za da ne kreiram poseben foreach za dvizenje i crtanje
-            foreach(Enemy enemy in enemies)
+            foreach (Enemy enemy in enemies)
             {
                 enemy.Move();
                 enemy.Draw(e.Graphics);
@@ -377,6 +401,7 @@ namespace VizuelnoProgramiranjeGame
                 p.Draw(e.Graphics);
             }
 
+            e.Dispose();
         }
 
         //Countdown timer za bossot, na 0 spavnuva
@@ -393,9 +418,18 @@ namespace VizuelnoProgramiranjeGame
             }
             
         }
+        //da se dovrsi
         private void bossBattleTimer_Tick(object sender, EventArgs e)
         {
             
+        }
+
+        private void particleTimer_Tick(object sender, EventArgs e)
+        {
+            int spawn = randSeed.Next(screenWidth);
+            Point spawnPoint = new Point(spawn, 0);
+            SpaceDebris particle = new SpaceDebris(spawnPoint);
+            spaceDebris.Add(particle);
         }
     }
 }

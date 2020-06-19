@@ -36,6 +36,7 @@
             this.enemyProjectileTimer = new System.Windows.Forms.Timer(this.components);
             this.bossTimer = new System.Windows.Forms.Timer(this.components);
             this.bossBattleTimer = new System.Windows.Forms.Timer(this.components);
+            this.particleTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // lblScore
@@ -87,15 +88,22 @@
             this.bossBattleTimer.Interval = 10;
             this.bossBattleTimer.Tick += new System.EventHandler(this.bossBattleTimer_Tick);
             // 
+            // particleTimer
+            // 
+            this.particleTimer.Enabled = true;
+            this.particleTimer.Interval = 200;
+            this.particleTimer.Tick += new System.EventHandler(this.particleTimer_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.lblTimer);
             this.Controls.Add(this.lblScore);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Alien Shooter placeholder";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
@@ -115,6 +123,7 @@
         private System.Windows.Forms.Timer enemyProjectileTimer;
         private System.Windows.Forms.Timer bossTimer;
         private System.Windows.Forms.Timer bossBattleTimer;
+        private System.Windows.Forms.Timer particleTimer;
     }
 }
 

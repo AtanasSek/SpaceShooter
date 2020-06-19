@@ -21,7 +21,7 @@ namespace VizuelnoProgramiranjeGame
 
         public float shootCooldown = 1;
         public Stopwatch CooldownTimer;
-
+        
 
         public void Draw(Graphics g)
         {
@@ -33,9 +33,9 @@ namespace VizuelnoProgramiranjeGame
             this.hitpoints -= p.projectileDamage;
         }
 
-        public int getHitPoints()
+        public void PureDamage(int damage)
         {
-            return this.hitpoints;
+            this.hitpoints -= damage;
         }
 
         public virtual Projectile Shoot()
@@ -47,6 +47,16 @@ namespace VizuelnoProgramiranjeGame
             return p;
         }
 
+        public virtual bool isHit(Projectile p)
+        {
+
+            if (hitbox.IntersectsWith(p.projectileHitbox) && !p.isEnemyProjectile)
+            {
+                return true;
+            }
+            else return false;
+
+        }
     }
 
     

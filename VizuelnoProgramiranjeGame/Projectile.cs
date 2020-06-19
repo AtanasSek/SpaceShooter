@@ -33,7 +33,7 @@ namespace VizuelnoProgramiranjeGame
         
         public void Draw(Graphics g)
         {
-            Brush brush = new SolidBrush(Color.Cyan);
+            Brush brush = new SolidBrush(Color.Red);
             g.FillEllipse(brush, firingPoint.X , firingPoint.Y , projectileWidth, projectileHeight);
             brush.Dispose();
             
