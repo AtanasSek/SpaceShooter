@@ -63,6 +63,16 @@ namespace VizuelnoProgramiranjeGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap damageUpgrade {
+            get {
+                object obj = ResourceManager.GetObject("damageUpgrade", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap enemy_red {
             get {
                 object obj = ResourceManager.GetObject("enemy_red", resourceCulture);
@@ -126,6 +136,16 @@ namespace VizuelnoProgramiranjeGame.Properties {
         internal static System.Drawing.Bitmap Space_Particle {
             get {
                 object obj = ResourceManager.GetObject("Space_Particle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap speedUpgrade {
+            get {
+                object obj = ResourceManager.GetObject("speedUpgrade", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -13,7 +13,7 @@ namespace VizuelnoProgramiranjeGame
     class Enemy : Spaceship
     {
         public Type type;
-
+        
         public Enemy(Point center, Type type)
         {
             base.center = center;
@@ -28,14 +28,14 @@ namespace VizuelnoProgramiranjeGame
             {
                 case Type.Regular:
                     base.sprite = new Bitmap(Resources.enemy_red);
-                    base.hitpoints = 1;
+                    base.hitpoints = 2;
                     base.width = sprite.Width;
                     base.height = sprite.Width;             
                     base.speed = 3;
                     break;
 
                 case Type.Tanky:
-                    base.hitpoints = 3;
+                    base.hitpoints = 10;
                     base.width = 80;
                     base.height = 60;
                     base.speed = 1;
@@ -43,7 +43,7 @@ namespace VizuelnoProgramiranjeGame
 
                 case Type.Shooter:
                     base.sprite = new Bitmap(Resources.enemy_yellow);
-                    base.hitpoints = 1;
+                    base.hitpoints = 3;
                     base.width = sprite.Width;
                     base.height = sprite.Width;
                     base.speed = 2;
@@ -52,13 +52,6 @@ namespace VizuelnoProgramiranjeGame
 
             base.hitbox.Width = base.width;
             base.hitbox.Height = base.height;
-        }
-
-        public int CollisionDamage(Player player)
-        {
-            int returnDamage = this.hitpoints;
-            this.hitpoints -= player.hitpoints;
-            return returnDamage;
         }
 
         public void Move()

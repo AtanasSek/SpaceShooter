@@ -18,10 +18,10 @@ namespace VizuelnoProgramiranjeGame
         public Rectangle hitbox;
         public int hitpoints = 1;
         public int speed;
+        public int projectileDamage = 1;
 
-        public float shootCooldown = 1;
+        public float shootCooldown = 900;
         public Stopwatch CooldownTimer;
-        
 
         public void Draw(Graphics g)
         {

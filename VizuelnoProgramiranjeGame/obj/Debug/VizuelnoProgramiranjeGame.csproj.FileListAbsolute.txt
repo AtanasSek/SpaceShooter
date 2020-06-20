@@ -18,3 +18,5 @@ C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\o
 C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.csproj.CoreCompileInputs.cache
 C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.exe
 C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.pdb
+C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.MainMenu.resources
+C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.Instructions.resources

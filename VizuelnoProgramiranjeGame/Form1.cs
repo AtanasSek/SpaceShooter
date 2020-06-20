@@ -25,6 +25,7 @@ namespace VizuelnoProgramiranjeGame
         List<Enemy> enemies;
         List<Boss> bosses;
         List<SpaceDebris> spaceDebris;
+        List<ShipUpgrade> shipUpgrades;
         bool isEnemyAllowedToSpawn;
         bool keyLeft;
         bool keyRight;
@@ -36,11 +37,12 @@ namespace VizuelnoProgramiranjeGame
         int screenWidth;
         int screenHeight;
         Random randSeed;
-        int bossCountDown;
+        int maxGameDuration;
+        int bossCountDown = 300;
         Bitmap background;
-        
 
-        public Form1()
+
+        public Form1(int seconds)
         {
 
             this.WindowState = FormWindowState.Maximized;
@@ -50,9 +52,9 @@ namespace VizuelnoProgramiranjeGame
             InitializeComponent();
             this.DoubleBuffered = true;
             this.background = new Bitmap(Resources.PixelGalaxy1);
-            
+            maxGameDuration = seconds;
             startGame();
-            
+
         }
 
         private void startGame()
@@ -62,10 +64,11 @@ namespace VizuelnoProgramiranjeGame
             enemies = new List<Enemy>();
             bosses = new List<Boss>();
             spaceDebris = new List<SpaceDebris>();
+            shipUpgrades = new List<ShipUpgrade>();
             randSeed = new Random();
             isEnemyAllowedToSpawn = true;
           
-            bossCountDown = 20;
+            bossCountDown = maxGameDuration;
             lblTimer.Text = "ETA: " + bossCountDown;
 
             score = 0;
@@ -138,12 +141,19 @@ namespace VizuelnoProgramiranjeGame
                 {
                     player.PureDamage(enemies[i].hitpoints);
                     enemies.RemoveAt(i);
+                    continue;
                 }
                 //idna iteracija dokolku sakam , piercing bullets samo mozam duplicat od forot vo poseben if bez projectiles.removeat;
 
                 //Hit detection za proektili od enemies i player
                 for (int j = 0; j < projectiles.Count; j++)
                 {
+
+                    if(projectiles[j].projectileHitbox.Y > screenHeight || projectiles[j].projectileHitbox.Y < 0)
+                    {
+                        projectiles.RemoveAt(j);
+                        continue;
+                    }
 
                     if (enemies[i].isHit(projectiles[j]))
                     {
@@ -156,16 +166,28 @@ namespace VizuelnoProgramiranjeGame
                             {
                                 score += 10;
                                 lblScore.Text = "Score:" + score;
+
+                                //Napraviv losa implementacija i upgrade.assigned e patchwork za da raboti, ako imam vreme ke go sredam
+                                ShipUpgrade upgrade = new ShipUpgrade(randSeed.Next(1,100),enemies[i]);
+                                if(upgrade.assigned)
+                                    shipUpgrades.Add(upgrade);
+
                             }
                             else if (enemies[i].type == Type.Shooter)
                             {
                                 score += 20;
                                 lblScore.Text = "Score:" + score;
+                                ShipUpgrade upgrade = new ShipUpgrade(randSeed.Next(1, 100), enemies[i]);
+                                if (upgrade.assigned)
+                                    shipUpgrades.Add(upgrade);
                             }
                             else if (enemies[i].type == Type.Tanky)
                             {
                                 score += 30;
                                 lblScore.Text = "Score:" + score;
+                                ShipUpgrade upgrade = new ShipUpgrade(randSeed.Next(1, 100), enemies[i]);
+                                if (upgrade.assigned)
+                                    shipUpgrades.Add(upgrade);
                             }
                             enemies.RemoveAt(i);
 
@@ -173,6 +195,7 @@ namespace VizuelnoProgramiranjeGame
 
                         projectiles.RemoveAt(j);
 
+                        continue;
                     }
                     else if (player.isHit(projectiles[j]))
                     {
@@ -215,6 +238,22 @@ namespace VizuelnoProgramiranjeGame
             }
         }
 
+        public void upgradeCollisionLogic()
+        {
+            for(int i = 0; i < shipUpgrades.Count; i++)
+            {
+                if(shipUpgrades[i].hitbox.Y > Screen.PrimaryScreen.Bounds.Height)
+                {
+                    shipUpgrades.RemoveAt(i);
+                    continue;
+                }
+                if (player.isHit(shipUpgrades[i]))
+                {
+                    player.setUpgrade(shipUpgrades[i]);
+                    shipUpgrades.RemoveAt(i);
+                }
+            }
+        }
         
         //controls
         //poradi nekoja pricina , so booleanite (pr. keyUp && keyRight) se dvizi dijagonalno ako kreiram poseben if, ali 
@@ -299,7 +338,7 @@ namespace VizuelnoProgramiranjeGame
             }
             if (keyShoot)
             {
-                if (player.CooldownTimer.Elapsed.Seconds >= player.shootCooldown)
+                if (player.CooldownTimer.Elapsed.TotalMilliseconds >= player.shootCooldown)
                 {
                     projectiles.Add(player.Shoot());
                     player.CooldownTimer.Restart();
@@ -315,6 +354,7 @@ namespace VizuelnoProgramiranjeGame
             //HIT DETECTION ZA ENEMIES,PLAYER I PROEKTILI POVRZANI SO NIV
             enemyCollisionLogic();
             bossCollisionLogic();
+            upgradeCollisionLogic();
 
             //staven e delov ovde za da nema delay vo key press
             keyPress();
@@ -387,6 +427,12 @@ namespace VizuelnoProgramiranjeGame
             {
                 enemy.Move();
                 enemy.Draw(e.Graphics);
+            }
+
+            foreach (ShipUpgrade upgrade in shipUpgrades)
+            {
+                upgrade.Move();
+                upgrade.Draw(e.Graphics);
             }
 
             foreach(Boss boss in bosses)
