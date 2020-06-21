@@ -112,21 +112,15 @@
     <None Include="Resources\ESprite.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Audio\Wide Putin Walking %28online-audio-converter.com%29.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Audio\Wide Putin Walking.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Screenshot_1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Resources\Background\PixelGalaxy1.png" />
     <Content Include="Resources\Background\Space Particle.png" />
     <Content Include="Resources\damageUpgrade.png" />
     <Content Include="Resources\enemy-red.png" />
     <Content Include="Resources\enemy-yellow.png" />
     <Content Include="Resources\speedUpgrade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Audio\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

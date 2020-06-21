@@ -85,7 +85,7 @@ namespace VizuelnoProgramiranjeGame
         //Preglasno, nema metodi za zvuk
         private void playMusic()
         {
-            SoundPlayer bossMusic = new SoundPlayer(Resources.Wide_Putin_Walking__online_audio_converter_com_);
+            SoundPlayer bossMusic = new SoundPlayer();
             bossMusic.Play();
         }
 
@@ -345,6 +345,15 @@ namespace VizuelnoProgramiranjeGame
                 }
             }
         }
+
+        void cleanUpParticle()
+        {
+            for (int i = 0; i < spaceDebris.Count; i++)
+            {
+                if (spaceDebris[i].center.Y >= screenHeight)
+                    spaceDebris.RemoveAt(i);
+            }
+        }
         private void mainTimer_Tick(object sender, EventArgs e)
         {
 
@@ -358,6 +367,7 @@ namespace VizuelnoProgramiranjeGame
 
             //staven e delov ovde za da nema delay vo key press
             keyPress();
+            cleanUpParticle();
             
         }
 

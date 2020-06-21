@@ -20,3 +20,5 @@ C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\o
 C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.pdb
 C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.MainMenu.resources
 C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.Instructions.resources
+C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.Instructions.resources
+C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.MainMenu.resources

@@ -10,22 +10,22 @@ namespace VizuelnoProgramiranjeGame
 {
     class SpaceDebris
     {
-        Point spawn;
+        public Point center;
         Bitmap sprite;
 
-        public SpaceDebris(Point spawn)
+        public SpaceDebris(Point center)
         {
-            this.spawn = spawn;
+            this.center = center;
             this.sprite = new Bitmap(Resources.Space_Particle);
         }
         public void Draw(Graphics e)
         {
-            e.DrawImage(sprite, spawn);
+            e.DrawImage(sprite, center);
         }
 
         public void Move()
         {
-            this.spawn.Y += 1;
+            this.center.Y += 1;
         }
     }
 }
