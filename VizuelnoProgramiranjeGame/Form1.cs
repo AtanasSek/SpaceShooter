@@ -11,7 +11,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using System.Windows.Media;
 using VizuelnoProgramiranjeGame.Properties;
+using AxWMPLib;
+
+using Color = System.Drawing.Color;
+using System.Runtime.CompilerServices;
+using System.IO;
 
 namespace VizuelnoProgramiranjeGame
 {
@@ -46,8 +52,8 @@ namespace VizuelnoProgramiranjeGame
         int maxGameDuration;
         int bossCountDown = 300;
         Bitmap background;
-
-
+      
+        
         public Form1(int seconds)
         {
 
@@ -59,12 +65,17 @@ namespace VizuelnoProgramiranjeGame
             this.DoubleBuffered = true;
             this.background = new Bitmap(Resources.PixelGalaxy1);
             maxGameDuration = seconds;
+
+
+            //Sprites se loadiraat na kreacija na forma sega, namesto na kreacija na objekt, bi trebalo da namali lag?
             regularSprite = new Bitmap(Resources.enemy_red);
             shooterSprite = new Bitmap(Resources.enemy_yellow);
             tankSprite = new Bitmap(Resources.enemy_green);
             placeholderSprite = new Bitmap(Resources.ESprite);
             particleSprite = new Bitmap(Resources.Space_Particle);
 
+
+            //using Color , zapamti , mediaplayer issue
             //Pause Panel
             panelPause.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width / 2 - panelPause.Width / 2, Screen.PrimaryScreen.WorkingArea.Height / 2 - panelPause.Height / 2);
             panelPause.BackColor = Color.FromArgb(100, 0, 0, 0);
@@ -74,7 +85,24 @@ namespace VizuelnoProgramiranjeGame
             panelWinLose.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width / 2 - panelPause.Width / 2, Screen.PrimaryScreen.WorkingArea.Height / 2 - panelPause.Height / 2);
             panelWinLose.BackColor = Color.FromArgb(100, 0, 0, 0);
             panelWinLose.Visible = false;
+
+
             startGame();
+
+        }
+
+        //Preglasno, nema metodi za zvuk,druga biblioteka mozebi ili manuelno da namalam zvuk?
+        public static void playMusic()
+        {
+           
+            //Muzika
+            AxWindowsMediaPlayer axwmp = new AxWindowsMediaPlayer();
+            axwmp.CreateControl();
+            axwmp.Enabled = true;
+            axwmp.URL = Path.Combine(System.IO.Path.GetFullPath(@"..\..\"), "Resources\\Audio\\Scandroid - 2517 (Instrumental).mp3");
+            axwmp.settings.setMode("loop", true);
+            axwmp.settings.volume = 10;
+            axwmp.Ctlcontrols.play();
 
         }
 
@@ -99,16 +127,12 @@ namespace VizuelnoProgramiranjeGame
             enemyTimer.Start();
             enemyProjectileTimer.Start();
             enemyTimer.Interval = 3000; //delayed start na neprijateli
+            
         }
 
         
 
-        //Preglasno, nema metodi za zvuk
-        private void playMusic()
-        {
-            SoundPlayer bossMusic = new SoundPlayer();
-            bossMusic.Play();
-        }
+        
 
         
 
@@ -116,6 +140,7 @@ namespace VizuelnoProgramiranjeGame
         //Spawnrates za sekoj tip na enemy
         private void spawnEnemies()
         {
+
             
             int spawnLocation = randSeed.Next(40, screenWidth - 40); //  40 vrednosta e za da ne klipuvaat premnogu nadvor od ekranot
             int type = randSeed.Next(0,100);

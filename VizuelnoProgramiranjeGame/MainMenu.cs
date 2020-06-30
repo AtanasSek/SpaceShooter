@@ -21,6 +21,7 @@ namespace VizuelnoProgramiranjeGame
             this.DoubleBuffered = true;
             panel1.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width/2 - panel1.Width/2,Screen.PrimaryScreen.WorkingArea.Height/2 - panel1.Height/2);
             panel1.BackColor = Color.FromArgb(100,0,0,0);
+            Form1.playMusic();
         }
 
         private void button5_Click(object sender, EventArgs e)

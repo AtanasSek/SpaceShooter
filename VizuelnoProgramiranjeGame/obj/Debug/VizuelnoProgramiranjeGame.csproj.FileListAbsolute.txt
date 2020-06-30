@@ -22,3 +22,8 @@ C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\o
 C:\Users\Dell\Desktop\Proekti\Vizuelno programiranje\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.Instructions.resources
 C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.Instructions.resources
 C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.MainMenu.resources
+C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\bin\Debug\Interop.WMPLib.dll
+C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\bin\Debug\AxInterop.WMPLib.dll
+C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\obj\Debug\Interop.WMPLib.dll
+C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\obj\Debug\AxInterop.WMPLib.dll
+C:\Users\Atanas\Desktop\Proekti\Vizuelno Programiranje\VizuelnoProgramiranjeGame\VizuelnoProgramiranjeGame\obj\Debug\VizuelnoProgramiranjeGame.csproj.ResolveComReference.cache

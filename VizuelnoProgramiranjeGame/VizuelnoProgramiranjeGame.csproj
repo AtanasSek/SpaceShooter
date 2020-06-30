@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -112,6 +113,7 @@
     <None Include="Resources\ESprite.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Audio\Scandroid - 2517 %28Instrumental%29.mp3" />
     <Content Include="Resources\Background\PixelGalaxy1.png" />
     <Content Include="Resources\Background\Space Particle.png" />
     <Content Include="Resources\damageUpgrade.png" />
@@ -121,7 +123,23 @@
     <Content Include="Resources\speedUpgrade.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\Audio\" />
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
