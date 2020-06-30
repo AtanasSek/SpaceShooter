@@ -17,7 +17,7 @@ namespace VizuelnoProgramiranjeGame
             base.center = center;
             base.sprite = new Bitmap(Resources.ESprite);
 
-            base.hitpoints = 3;
+            base.hitpoints = 100;
             base.width = width;
             base.height = height;
             base.hitbox.X = base.center.X;

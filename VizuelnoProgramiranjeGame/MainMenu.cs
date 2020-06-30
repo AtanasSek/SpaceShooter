@@ -33,7 +33,7 @@ namespace VizuelnoProgramiranjeGame
             this.Hide();
             Form1 f1 = new Form1(300);
             f1.ShowDialog();
-            this.Show();
+            f1.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -41,7 +41,7 @@ namespace VizuelnoProgramiranjeGame
             this.Hide();
             Form1 f1 = new Form1(Int32.MaxValue);
             f1.ShowDialog();
-            this.Show();
+            f1.Show();
         }
 
         private void MainMenu_Paint(object sender, PaintEventArgs e)
@@ -56,9 +56,5 @@ namespace VizuelnoProgramiranjeGame
             instructions.ShowDialog();
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

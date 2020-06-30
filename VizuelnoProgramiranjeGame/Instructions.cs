@@ -18,8 +18,12 @@ namespace VizuelnoProgramiranjeGame
             this.FormBorderStyle = FormBorderStyle.None;
             InitializeComponent();
             this.DoubleBuffered = true;
-            panel1.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width / 2 - panel1.Width / 2, Screen.PrimaryScreen.WorkingArea.Height / 2 - panel1.Height);
-            panel1.BackColor = Color.FromArgb(100, 0, 0, 0);
+
+            tableLayoutPanel1.BackColor = Color.FromArgb(100, 0, 0, 0);
+            //tableLayoutPanel1.Width = Screen.PrimaryScreen.WorkingArea.Width / 2;
+            //tableLayoutPanel1.Height = Screen.PrimaryScreen.WorkingArea.Height / 2;
+            tableLayoutPanel1.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width / 2 - tableLayoutPanel1.Width / 2, Screen.PrimaryScreen.WorkingArea.Height / 2 - tableLayoutPanel1.Height/2);
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -28,5 +32,6 @@ namespace VizuelnoProgramiranjeGame
             Form mainMenu = new MainMenu();
             mainMenu.ShowDialog();
         }
+
     }
 }

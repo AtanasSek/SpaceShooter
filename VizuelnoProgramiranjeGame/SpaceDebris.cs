@@ -13,10 +13,10 @@ namespace VizuelnoProgramiranjeGame
         public Point center;
         Bitmap sprite;
 
-        public SpaceDebris(Point center)
+        public SpaceDebris(Point center, Bitmap particleSprite)
         {
             this.center = center;
-            this.sprite = new Bitmap(Resources.Space_Particle);
+            this.sprite = particleSprite;
         }
         public void Draw(Graphics e)
         {

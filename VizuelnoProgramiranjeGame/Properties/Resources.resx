@@ -121,6 +121,9 @@
   <data name="damageUpgrade" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\damageupgrade.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="enemy_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\enemy-green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="enemy_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\enemy-red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

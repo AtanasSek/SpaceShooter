@@ -115,6 +115,7 @@
     <Content Include="Resources\Background\PixelGalaxy1.png" />
     <Content Include="Resources\Background\Space Particle.png" />
     <Content Include="Resources\damageUpgrade.png" />
+    <Content Include="Resources\enemy-green.png" />
     <Content Include="Resources\enemy-red.png" />
     <Content Include="Resources\enemy-yellow.png" />
     <Content Include="Resources\speedUpgrade.png" />

@@ -21,6 +21,12 @@ namespace VizuelnoProgramiranjeGame
     {
         
         Player player;
+        Bitmap regularSprite;
+        Bitmap shooterSprite;
+        Bitmap tankSprite;
+        Bitmap placeholderSprite;
+        Bitmap particleSprite;
+
         List<Projectile> projectiles;
         List<Enemy> enemies;
         List<Boss> bosses;
@@ -53,6 +59,21 @@ namespace VizuelnoProgramiranjeGame
             this.DoubleBuffered = true;
             this.background = new Bitmap(Resources.PixelGalaxy1);
             maxGameDuration = seconds;
+            regularSprite = new Bitmap(Resources.enemy_red);
+            shooterSprite = new Bitmap(Resources.enemy_yellow);
+            tankSprite = new Bitmap(Resources.enemy_green);
+            placeholderSprite = new Bitmap(Resources.ESprite);
+            particleSprite = new Bitmap(Resources.Space_Particle);
+
+            //Pause Panel
+            panelPause.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width / 2 - panelPause.Width / 2, Screen.PrimaryScreen.WorkingArea.Height / 2 - panelPause.Height / 2);
+            panelPause.BackColor = Color.FromArgb(100, 0, 0, 0);
+            panelPause.Visible = false;
+
+            //Win/Lose Panel
+            panelWinLose.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width / 2 - panelPause.Width / 2, Screen.PrimaryScreen.WorkingArea.Height / 2 - panelPause.Height / 2);
+            panelWinLose.BackColor = Color.FromArgb(100, 0, 0, 0);
+            panelWinLose.Visible = false;
             startGame();
 
         }
@@ -103,20 +124,35 @@ namespace VizuelnoProgramiranjeGame
             // -30, -40, -60 se staveni za Y oska za po smooth tranzicija da ima na nivno pojavuvanje
             if(type >= 50)
             {
-                Enemy enemy = new Enemy(new Point(spawnLocation, -30), Type.Regular);
+                Enemy enemy = new Enemy(new Point(spawnLocation, -30), Type.Regular,regularSprite);
                 enemies.Add(enemy);
             }
             else if(type >=20 && type < 50)
             {
-                Enemy enemy = new Enemy(new Point(spawnLocation, -40), Type.Shooter);
+                Enemy enemy = new Enemy(new Point(spawnLocation, -40), Type.Shooter,shooterSprite);
                 enemies.Add(enemy);
             }
             else if(type < 20)
             {
-                Enemy enemy = new Enemy(new Point(spawnLocation, -60), Type.Tanky);
+                Enemy enemy = new Enemy(new Point(spawnLocation, -60), Type.Tanky, tankSprite);
                 enemies.Add(enemy);
             }   
             
+        }
+
+        public void stopGame()
+        {
+            mainTimer.Stop();
+            lblFinalScore.Text = "Final Score: " + score;
+            if (player.hitpoints <= 0)
+            {
+                lblGameEnd.Text = "Destroyed";
+            }
+            else
+            {
+                lblGameEnd.Text = "You Won!";
+            }
+            panelWinLose.Visible = true;
         }
 
         //HIT DETECTION ZA ENEMIES,PLAYER I PROEKTILI POVRZANI SO NIV
@@ -124,7 +160,7 @@ namespace VizuelnoProgramiranjeGame
         {
             if (player.hitpoints <= 0)
             {
-                startGame();
+                stopGame();
             }
             for (int i = 0; i < enemies.Count; i++)
             {
@@ -217,7 +253,7 @@ namespace VizuelnoProgramiranjeGame
             {
                 if (player.isHit(bosses[i]))
                 {
-                    startGame();
+                    stopGame();
                 }
                 for (int j = 0; j < projectiles.Count; j++)
                 {
@@ -227,12 +263,13 @@ namespace VizuelnoProgramiranjeGame
                         projectiles.RemoveAt(j);
                         if (bosses[i].hitpoints <= 0)
                         {
-                            startGame();
+                            stopGame();
                         }
                     }
                     else if(player.isHit(projectiles[j]))
                     {
-                        startGame();
+                        player.Damage(projectiles[j]);
+                        //startGame();
                     }
                 }
             }
@@ -254,7 +291,22 @@ namespace VizuelnoProgramiranjeGame
                 }
             }
         }
-        
+
+        public void pauseGame()
+        {
+            if (pause)
+            {
+                panelPause.Visible = true;
+                mainTimer.Stop();
+            }
+            else
+            {
+                panelPause.Visible = false;
+                mainTimer.Start();
+            }
+            
+        }
+
         //controls
         //poradi nekoja pricina , so booleanite (pr. keyUp && keyRight) se dvizi dijagonalno ako kreiram poseben if, ali 
         //vo case-ot ne raboti, treba podobar fix od gorenavedeniot
@@ -284,6 +336,11 @@ namespace VizuelnoProgramiranjeGame
 
                 case Keys.Z: //moze podobro da se napravi ali me mrzi
                     keyShoot = true;
+                    break;
+
+                case Keys.Escape:
+                    pause = !pause;
+                    pauseGame();
                     break;
 
             }
@@ -376,7 +433,7 @@ namespace VizuelnoProgramiranjeGame
         {
             if (isEnemyAllowedToSpawn)
             {
-                enemyTimer.Interval = randSeed.Next(300,1000);
+                enemyTimer.Interval = randSeed.Next(400,1250); 
                 spawnEnemies();
             }
             else
@@ -484,8 +541,28 @@ namespace VizuelnoProgramiranjeGame
         {
             int spawn = randSeed.Next(screenWidth);
             Point spawnPoint = new Point(spawn, 0);
-            SpaceDebris particle = new SpaceDebris(spawnPoint);
+            SpaceDebris particle = new SpaceDebris(spawnPoint, particleSprite);
             spaceDebris.Add(particle);
+        }
+
+        private void continueGame_Click(object sender, EventArgs e)
+        {
+            pauseGame();
+        }
+
+        private void quitGame_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form mainMenu = new MainMenu();
+            mainMenu.ShowDialog();
+        }
+
+        private void btnRestart_Click(object sender, EventArgs e)
+        {
+            
+            startGame(); 
+            panelWinLose.Visible = false;
+            this.Focus();
         }
     }
 }

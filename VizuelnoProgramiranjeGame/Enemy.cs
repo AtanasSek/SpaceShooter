@@ -14,10 +14,10 @@ namespace VizuelnoProgramiranjeGame
     {
         public Type type;
         
-        public Enemy(Point center, Type type)
+        public Enemy(Point center, Type type, Bitmap sprite)
         {
             base.center = center;
-            base.sprite = new Bitmap(Resources.ESprite);
+            //base.sprite = new Bitmap(Resources.ESprite);
 
             base.hitbox.X = base.center.X;
             base.hitbox.Y = base.center.Y;
@@ -27,23 +27,24 @@ namespace VizuelnoProgramiranjeGame
             switch (type)
             {
                 case Type.Regular:
-                    base.sprite = new Bitmap(Resources.enemy_red);
-                    base.hitpoints = 2;
+                    base.sprite = sprite;
+                    base.hitpoints = 3;
                     base.width = sprite.Width;
                     base.height = sprite.Width;             
                     base.speed = 3;
                     break;
 
                 case Type.Tanky:
-                    base.hitpoints = 10;
-                    base.width = 80;
-                    base.height = 60;
+                    base.sprite = sprite;
+                    base.hitpoints = 12;
+                    base.width = sprite.Width;
+                    base.height = sprite.Height;
                     base.speed = 1;
                     break;
 
                 case Type.Shooter:
-                    base.sprite = new Bitmap(Resources.enemy_yellow);
-                    base.hitpoints = 3;
+                    base.sprite = sprite;
+                    base.hitpoints = 4;
                     base.width = sprite.Width;
                     base.height = sprite.Width;
                     base.speed = 2;
