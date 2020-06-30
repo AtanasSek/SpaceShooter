@@ -507,7 +507,6 @@ namespace VizuelnoProgramiranjeGame
         }
 
         
-
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             //backgroundot laguva mnogu ako e kompresiran, treba da se najde pogolema slika sto izgleda ok
@@ -518,7 +517,7 @@ namespace VizuelnoProgramiranjeGame
                 particle.Move();
             }
             player.Draw(e.Graphics);
-            player.DrawHUD(e.Graphics);
+            
             
 
             //Brzina na neprijateli i proektili e povrzana so MainTimer tick interval, mozebi da se napravi
@@ -547,6 +546,8 @@ namespace VizuelnoProgramiranjeGame
                 p.Move();
                 p.Draw(e.Graphics);
             }
+
+            player.DrawHUD(e.Graphics);
 
             e.Dispose();
         }

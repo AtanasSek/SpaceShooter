@@ -34,7 +34,9 @@ namespace VizuelnoProgramiranjeGame
             this.hitpoints = 0;
             this.assigned = false;
 
-            if (RandomSeed > 10 && RandomSeed <= 15)
+
+            //extra life
+            if (RandomSeed > 10 && RandomSeed <= 20)
             {
                 sprite = new Bitmap(Resources.PSprite);
                 this.height = 32;
@@ -42,6 +44,8 @@ namespace VizuelnoProgramiranjeGame
                 this.hitpoints = 1;
                 assigned = true;
             }
+
+            //damageUP
             else if (RandomSeed > 5 && RandomSeed <= 10)
             {
                 sprite = new Bitmap(Resources.damageUpgrade);
@@ -50,6 +54,8 @@ namespace VizuelnoProgramiranjeGame
                 this.projectileDamage = 1;
                 assigned = true;
             }
+
+            //speedUP
             else if (RandomSeed <= 5)
             {
                 sprite = new Bitmap(Resources.speedUpgrade);

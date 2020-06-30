@@ -73,7 +73,7 @@ namespace VizuelnoProgramiranjeGame
         public void setUpgrade(ShipUpgrade upgrade)
         {
 
-            if(base.hitpoints + upgrade.hitpoints <= 30)
+            if(base.hitpoints + upgrade.hitpoints <= 36)
                 base.hitpoints += upgrade.hitpoints;
 
             if(base.projectileDamage + upgrade.projectileDamage <= 4)
@@ -92,7 +92,7 @@ namespace VizuelnoProgramiranjeGame
                 g.DrawImage(base.sprite, Screen.PrimaryScreen.Bounds.Left, Screen.PrimaryScreen.Bounds.Bottom - height, base.width, base.height);
                 distance = width + 20;
                 SolidBrush brush = new SolidBrush(Color.White);
-                FontFamily ff = new FontFamily("Courier");
+                FontFamily ff = new FontFamily("Courier New"); 
                 System.Drawing.Font font = new System.Drawing.Font(ff, 30);
                 g.DrawString("X"+hitpoints,font,brush, new Point(0 + width, Screen.PrimaryScreen.Bounds.Bottom - height));
             }
