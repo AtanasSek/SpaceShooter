@@ -294,6 +294,7 @@ namespace VizuelnoProgramiranjeGame
 
         public void pauseGame()
         {
+            pause = !pause;
             if (pause)
             {
                 panelPause.Visible = true;
@@ -302,6 +303,7 @@ namespace VizuelnoProgramiranjeGame
             else
             {
                 panelPause.Visible = false;
+                this.Focus();
                 mainTimer.Start();
             }
             
@@ -339,7 +341,7 @@ namespace VizuelnoProgramiranjeGame
                     break;
 
                 case Keys.Escape:
-                    pause = !pause;
+                    
                     pauseGame();
                     break;
 
