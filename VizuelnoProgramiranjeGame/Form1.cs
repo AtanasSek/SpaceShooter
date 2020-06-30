@@ -18,6 +18,7 @@ using AxWMPLib;
 using Color = System.Drawing.Color;
 using System.Runtime.CompilerServices;
 using System.IO;
+using System.Reflection;
 
 namespace VizuelnoProgramiranjeGame
 {
@@ -126,15 +127,11 @@ namespace VizuelnoProgramiranjeGame
             mainTimer.Start();
             enemyTimer.Start();
             enemyProjectileTimer.Start();
+            particleTimer.Start();
+            bossTimer.Start();
             enemyTimer.Interval = 3000; //delayed start na neprijateli
             
-        }
-
-        
-
-        
-
-        
+        }  
 
 
         //Spawnrates za sekoj tip na enemy
@@ -317,6 +314,8 @@ namespace VizuelnoProgramiranjeGame
             }
         }
 
+
+        //Bug , ako pauzira igracot konstantno , timerot se refreshira i so toa ne spawnuva nisto, se dodeka igracot spama pause
         public void pauseGame()
         {
             pause = !pause;
@@ -324,12 +323,20 @@ namespace VizuelnoProgramiranjeGame
             {
                 panelPause.Visible = true;
                 mainTimer.Stop();
+                enemyTimer.Stop();
+                enemyProjectileTimer.Stop();
+                particleTimer.Stop();
+                bossTimer.Stop();
             }
             else
             {
                 panelPause.Visible = false;
                 this.Focus();
                 mainTimer.Start();
+                enemyTimer.Start();
+                enemyProjectileTimer.Start();
+                particleTimer.Start();
+                bossTimer.Start();
             }
             
         }
