@@ -21,7 +21,7 @@ namespace VizuelnoProgramiranjeGame
             this.DoubleBuffered = true;
             panel1.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width/2 - panel1.Width/2,Screen.PrimaryScreen.WorkingArea.Height/2 - panel1.Height/2);
             panel1.BackColor = Color.FromArgb(100,0,0,0);
-            Form1.playMusic();
+            Game.playMusic();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace VizuelnoProgramiranjeGame
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Form1 f1 = new Form1(300);
+            Game f1 = new Game(300);
             f1.ShowDialog();
             f1.Show();
         }
@@ -40,7 +40,7 @@ namespace VizuelnoProgramiranjeGame
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Form1 f1 = new Form1(Int32.MaxValue);
+            Game f1 = new Game(Int32.MaxValue);
             f1.ShowDialog();
             f1.Show();
         }
