@@ -19,8 +19,8 @@
 
 *Подетално објаснување на механиката на играта и на непријателите има во доленаведениот **Instructions** предел во главното мени*
 
-![Image](https://raw.githubusercontent.com/AtanasSek/SpaceShooter/master/VizuelnoProgramiranjeGame/Screenshots/Main_Menu)
-![Image](https://raw.githubusercontent.com/AtanasSek/SpaceShooter/master/VizuelnoProgramiranjeGame/Screenshots/Instructions)
+![Image](https://raw.githubusercontent.com/AtanasSek/SpaceShooter/master/VizuelnoProgramiranjeGame/Screenshots/Main_Menu.png)
+![Image](https://raw.githubusercontent.com/AtanasSek/SpaceShooter/master/VizuelnoProgramiranjeGame/Screenshots/Instructions.png)
 ---
 
 ## Опис на структурата на програмата
