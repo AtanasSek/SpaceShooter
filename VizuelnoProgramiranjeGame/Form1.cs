@@ -161,9 +161,10 @@ namespace VizuelnoProgramiranjeGame
             }   
             
         }
-
+    
         public void stopGame()
         {
+            
             mainTimer.Stop();
             lblFinalScore.Text = "Final Score: " + score;
             if (player.hitpoints <= 0)
@@ -215,38 +216,38 @@ namespace VizuelnoProgramiranjeGame
 
                     if (enemies[i].isHit(projectiles[j]))
                     {
-
                         enemies[i].Damage(projectiles[j]);
+
                         if (enemies[i].hitpoints <= 0)
                         {
 
-                            if (enemies[i].type == Type.Regular)
+                            switch (enemies[i].type)
                             {
-                                score += 10;
-                                lblScore.Text = "Score:" + score;
+                                case (Type.Regular):
+                                    score += 10;                                
+                                    //Napraviv losa implementacija i upgrade.assigned e patchwork za da raboti, ako imam vreme ke go sredam
+                                    ShipUpgrade upgrade = new ShipUpgrade(randSeed.Next(1, 100), enemies[i]);
+                                    if (upgrade.assigned)
+                                        shipUpgrades.Add(upgrade);
+                                    break;
 
-                                //Napraviv losa implementacija i upgrade.assigned e patchwork za da raboti, ako imam vreme ke go sredam
-                                ShipUpgrade upgrade = new ShipUpgrade(randSeed.Next(1,100),enemies[i]);
-                                if(upgrade.assigned)
-                                    shipUpgrades.Add(upgrade);
+                                case (Type.Shooter):
+                                    score += 20;                                   
+                                    upgrade = new ShipUpgrade(randSeed.Next(1, 100), enemies[i]);
+                                    if (upgrade.assigned)
+                                        shipUpgrades.Add(upgrade);
+                                    break;
 
+                                case (Type.Tanky):
+                                    score += 30;
+                                    upgrade = new ShipUpgrade(randSeed.Next(1, 100), enemies[i]);
+                                    if (upgrade.assigned)
+                                        shipUpgrades.Add(upgrade);
+                                    break;
                             }
-                            else if (enemies[i].type == Type.Shooter)
-                            {
-                                score += 20;
-                                lblScore.Text = "Score:" + score;
-                                ShipUpgrade upgrade = new ShipUpgrade(randSeed.Next(1, 100), enemies[i]);
-                                if (upgrade.assigned)
-                                    shipUpgrades.Add(upgrade);
-                            }
-                            else if (enemies[i].type == Type.Tanky)
-                            {
-                                score += 30;
-                                lblScore.Text = "Score:" + score;
-                                ShipUpgrade upgrade = new ShipUpgrade(randSeed.Next(1, 100), enemies[i]);
-                                if (upgrade.assigned)
-                                    shipUpgrades.Add(upgrade);
-                            }
+                            lblScore.Text = "Score:" + score;
+
+
                             enemies.RemoveAt(i);
 
                         }
